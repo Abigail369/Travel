@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      id="transportMode"
-      style="width: 400px;height: 180px;margin-left: 30px;margin-top: 50px; "
-    ></div>
+    <div id="transportMode" style="width: 400px;height: 180px;margin-left: 30px;margin-top: 50px; "></div>
   </div>
 </template>
 
@@ -22,23 +19,23 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data () {
     return {};
   },
   watch: {
     ticketSale: {
-      handler: function() {
+      handler: function () {
         this.getTransportModeChart();
       }
     },
     ticketChannelCount: {
-      handler: function() {
+      handler: function () {
         this.getTransportModeChart();
       }
     }
   },
   methods: {
-    getTransportModeChart() {
+    getTransportModeChart () {
       // 渠道：0自营 1去哪儿网 2同程 3其他
       let channelList = ["自营", "去哪儿网", "同程", "其他"];
       let channelData = this.$props.ticketChannelCount;
@@ -52,7 +49,7 @@ export default {
           trigger: "item"
         },
         legend: {
-          right: 50,
+          right: 5,
           top: "25%",
           orient: "vertical",
           textStyle: {
@@ -60,15 +57,14 @@ export default {
             fontSize: 14
           },
           icon: "circle",
-          formatter(name) {
+          formatter (name) {
             let value;
             channelData.forEach(item => {
-              console.log(item);
               if (channelList[item.channel] == name) {
                 value = item.channelCount;
               }
             });
-            return [`${name} —— ${(value / total) * 100}%`].join("\n");
+            return [`${name == '去哪儿网' ? name : (name + '       ')} —— ${((value / total) * 100).toFixed(2)}%`].join("\n");
           }
         },
         graphic: {

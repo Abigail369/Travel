@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="market-analysis-frame-left">
-      <div
-        class="market-analysis-background-frame-normal"
-        style="margin-top: 0"
-      >
+      <div class="market-analysis-background-frame-normal" style="margin-top: 0">
         <img :src="titleArrow" class="market-analysis-img" />
         <div class="market-analysis-title-font">游客性别</div>
         <tourist-gender :genderCount="genderCount"></tourist-gender>
@@ -17,9 +14,7 @@
       <div class="market-analysis-background-frame-normal">
         <img :src="titleArrow" class="market-analysis-img" />
         <div class="market-analysis-title-font">游客星座</div>
-        <tourist-constellation
-          :constellationList="constellationList"
-        ></tourist-constellation>
+        <tourist-constellation :constellationList="constellationList"></tourist-constellation>
       </div>
       <div class="market-analysis-background-frame-normal">
         <img :src="titleArrow" class="market-analysis-img" />
@@ -35,15 +30,9 @@
       <div class="market-analysis-background-frame-large">
         <img :src="titleArrow" class="market-analysis-img" />
         <div class="market-analysis-title-font">交通方式</div>
-        <transport-mode
-          :ticket-sale="ticketSale"
-          :ticket-channel-count="ticketChannelCount"
-        ></transport-mode>
+        <transport-mode :ticket-sale="ticketSale" :ticket-channel-count="ticketChannelCount"></transport-mode>
       </div>
-      <div
-        class="market-analysis-background-frame-large"
-        style="margin-left: 25px"
-      >
+      <div class="market-analysis-background-frame-large" style="margin-left: 25px">
         <img :src="titleArrow" class="market-analysis-img" />
         <div class="market-analysis-title-font">出行方式</div>
         <travel-mode :travelling-ways="travellingWays"></travel-mode>
@@ -51,10 +40,7 @@
     </div>
 
     <div class="market-analysis-frame-right">
-      <div
-        class="market-analysis-background-frame-normal"
-        style="margin-top: 0"
-      >
+      <div class="market-analysis-background-frame-normal" style="margin-top: 0">
         <img :src="titleArrow" class="market-analysis-img" />
         <div class="market-analysis-title-font">停车场数据</div>
         <carport-data></carport-data>
@@ -117,7 +103,7 @@ export default {
     careerRanking,
     academicRanking
   },
-  data() {
+  data () {
     return {
       titleArrow: titleArrow,
       constellationList: {}, //游客星座
@@ -129,12 +115,12 @@ export default {
       ticketChannelCount: [] //购买渠道统计
     };
   },
-  mounted() {
+  mounted () {
     this.getTouristAnalysis();
     this.getTicketDetailByDate();
   },
   methods: {
-    getTouristAnalysis() {
+    getTouristAnalysis () {
       getTouristAnalysis().then(res => {
         if (res.data.code == "00000") {
           // console.log(res.data.data[0]);
@@ -148,7 +134,6 @@ export default {
             allData.sixtyFiveCount || 0,
             allData.overSixtyFiveCount || 0
           ];
-          console.log(this.touristAge);
           // 游客星座
           this.constellationList = allData.constellationList[0] || {};
           // 出行方式
@@ -159,7 +144,7 @@ export default {
         }
       });
     },
-    getTicketDetailByDate() {
+    getTicketDetailByDate () {
       let date = new Date().toLocaleDateString().replace(/\//g, "-");
       getTicketDetailByDate(date).then(res => {
         if (res.data.code == "00000") {
